@@ -1,4 +1,4 @@
-#install.packages("RODBC")
+#install.packages("ggplot2")
 #install.packages("splitstackshape")
 #install.packages("tidytext")
 
@@ -30,7 +30,7 @@ library(tidytext)
 
 #data(stop_words)
 #show most common words
-tail(names(sort(table(CareData$word))),100)
+tail(names(sort(table(CareData$word))),10)
 
 #Test Sentiments lists
   #sentiments
@@ -57,10 +57,10 @@ CareTibCount %>%
   top_n(25) %>%
   ungroup() %>%
   mutate(word = reorder(word, n)) %>%
-  ggplot(aes(crmreasonOne, n, fill = sentiment)) +
+  ggplot(aes(reasonCode, n, fill = sentiment)) +
   geom_col(show.legend = FALSE) +
   facet_wrap(~sentiment, scales = "free_y") +
-  labs(y = "10/01 - Contribution to sentiment",
+  labs(y = "Contribution to sentiment",
        x = NULL) +
   coord_flip()
 
@@ -78,7 +78,6 @@ CareTibbleBing %>%
   count(word) %>%
   with (wordcloud(word, n, max.words = 100))
 
-##dplyr study http://www.datacarpentry.org/R-genomics/04-dplyr.html
 
 #Wordcloud group +-
 CareTibbleBing %>%
@@ -86,24 +85,11 @@ CareTibbleBing %>%
   acast(word ~ sentiment, value.var = "n", fill = 0) %>%
   comparison.cloud(colors = c("#F8766D","#00BFC4"),
                    max.words = 100)
-#Mutate DF add columns negSentiment posSentiment
-CareTibbleBing$negSentiment <- sum(CareTibbleBing$sentiment =="negative")
-CareTibbleBing$posSentiment <- sum(CareTibbleBing$sentiment =="positive")
 
-#dplyr use to aggregate by column
-CareSentiment <- CareTibCount$positiveSentiment  %>%
-  filter(sentiment !="positive")  %>%
-  group_by(crmReasonone)  %>%
-  summarise(positiveSentiment = sum(n))
-
-names(CareSentiment) <- c("crmReasonOne","positiveSentiment")
 
 #aggregate(CareTibCount$n, by=list(Category=CareTibCount$crmReasonOne,Sentiment=CareTibCount$sentiment), FUN=sum,
  #         negative.rm=TRUE)
-#?aggregate
 
-ggplot(, aes(x=, y=)) +
-  geom_point(shape=1)
 
 
 
