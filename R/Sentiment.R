@@ -1,6 +1,6 @@
-install.packages("RODBC")
-install.packages("splitstackshape")
-install.packages("tidytext")
+#install.packages("RODBC")
+#install.packages("splitstackshape")
+#install.packages("tidytext")
 
 library(RODBC)
 #--Create a data connection locally to a SQL Server
@@ -8,15 +8,17 @@ library(RODBC)
 odbcChannel <- odbcConnect("SQLServer")
 
 #Option 2  - Pull Query
-res <- sqlquery(odbcChannel, "select top 100 * from prod.dbo.table")
+res <- sqlQuery(odbcChannel, "select top 100 * from prod.dbo.customersurveys")
 res
 #Start Split of text
+#Make sure your columns are explicit because it is case sensitive
 library(splitstackshape)
-CareData <- cSplit(res,"notes", sep=" ", direction = "long")
-CareData <- cSplit(CareData,"notes",sep="/",direction = "long")
+CareData <- cSplit(res,"Notes", sep =" ", direction = "long")
+#this is where you can create more special character separators
+CareData <- cSplit(CareData,"Notes",sep="/",direction = "long")
 CareData
 
-names(CareData) <- c("column1","column2")
+names(CareData) <- c("surveyDate","customerID","reasonCode","word")
 
 #-Cleaning special characters
 #DF$[Name] adds column
@@ -45,7 +47,7 @@ CareTibbleBing <- CareTibble %>%
 
 #?dplyr:count browseVignettes(package = "dplyr")
 #Count by word sentiment
-CareTibCount <- CareTibbleBing %>% count(crmreasonOne,word,sentiment,sort = TRUE)
+CareTibCount <- CareTibbleBing %>% count(reasonCode,word,sentiment,sort = TRUE)
 
 #bar chart
 library(ggplot2)
