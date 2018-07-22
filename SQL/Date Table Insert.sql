@@ -1,5 +1,6 @@
 --source 
 --https://www.codeproject.com/Articles/647950/Create-and-Populate-Date-Dimension-for-Data-Wareho
+Use Prod
 DECLARE @StartDate DATETIME = '01/01/2014' --Starting value of Date Range
 DECLARE @EndDate DATETIME = '12/31/2018' --End Value of Date Range
 
