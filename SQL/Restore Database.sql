@@ -9,7 +9,7 @@ GO
 Declare @DataLogicalName varchar(50) = 'AdventureWorks2016_Data' --from logical name
 Declare @LogLogicalName varchar(50) = 'AdventureWorks2016_Log' --from logical name
 
-RESTORE DATABASE AdventureWorks2016  
+RESTORE DATABASE Test  
 FROM DISK = 'E:\Test Database\AdventureWorks2016.bak'  
-WITH MOVE @DataLogicalName TO 'E:\Microsoft SQL Server 2016\MSSQL13.SQLEXPRESS\MSSQL\Backup\AdventureWorks2016_Data.mdf',  
-MOVE @LogLogicalName TO 'E:\Microsoft SQL Server 2016\MSSQL13.SQLEXPRESS\MSSQL\Backup\AdventureWorks2016_Log.ldf' 
+WITH MOVE @DataLogicalName TO 'E:\Test Database\AdventureWorks2016_Data.mdf',  
+MOVE @LogLogicalName TO 'E:\Test Database\AdventureWorks2016_Log.ldf' 
