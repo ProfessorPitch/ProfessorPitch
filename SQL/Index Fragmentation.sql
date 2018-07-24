@@ -1,4 +1,4 @@
-USE Prod --database
+USE adventureworks2016 --database
 Select
 		dbschemas.[name] as [Schema],
 		dbtables.[name] as [Table],
@@ -8,7 +8,7 @@ Select
 from sys.dm_db_index_physical_stats (DB_ID(), NULL,NULL,NULL,NULL) as indexstats
 join sys.tables dbtables on dbtables.[object_id] = indexstats.[object_id]
 join sys.schemas dbschemas on dbtables.[schema_id] = dbschemas.[schema_id]
-	and dbschemas.[name] = 'dbo'
+	--and dbschemas.[name] = 'dbo'
 join sys.indexes as dbindexes on dbindexes.[object_id] = indexstats.[object_id]
 	and indexstats.index_id = dbindexes.index_id
 
