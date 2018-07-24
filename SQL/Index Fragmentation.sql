@@ -1,4 +1,4 @@
-USE adventureworks2016 --database
+USE adventureworks2016 --database choice
 Select
 		dbschemas.[name] as [Schema],
 		dbtables.[name] as [Table],

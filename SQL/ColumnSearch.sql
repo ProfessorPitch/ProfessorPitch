@@ -1,4 +1,4 @@
-Use AdventureWorks2016
+Use AdventureWorks2016 --database
 SELECT      c.name  AS 'ColumnName'
             ,t.name AS 'TableName'
 FROM        sys.columns c
