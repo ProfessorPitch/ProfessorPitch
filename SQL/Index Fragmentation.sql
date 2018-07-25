@@ -1,4 +1,4 @@
-USE adventureworks2016 --database choice
+USE Prod --database choice
 Select
 		dbschemas.[name] as [Schema],
 		dbtables.[name] as [Table],
@@ -13,5 +13,5 @@ join sys.indexes as dbindexes on dbindexes.[object_id] = indexstats.[object_id]
 	and indexstats.index_id = dbindexes.index_id
 
 where indexstats.database_id = DB_ID()
-	and indexstats.page_count > 1000
+	--and indexstats.page_count > 1000
 order by indexstats.avg_fragmentation_in_percent desc
