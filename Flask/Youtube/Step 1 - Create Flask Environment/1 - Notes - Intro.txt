@@ -1,0 +1,13 @@
+terminal
+Python 3.7 - https://www.python.org/downloads/
+Install Python
+Create directory
+
+Install virtualenv - py -m pip install --user virtualenv
+Create ENV - py -m virtualenv env
+Activate virtual env - .\env\Scripts\activate
+
+install flask while in env - pip install flask
+http://localhost:5000/ 
+
+deactivate to get out of it
